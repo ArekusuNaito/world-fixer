@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -32,26 +32,31 @@ public class Planet : MonoBehaviour
 
     void Start()
     {
-        // this.chargingMinigame.OnPlayerInputProcessedEvent+=Something;
+        this.chargingMinigame.OnPlayerInputProcessedEvent+=(button,success)=>
+        {
+            Debug.Log($"Charge Input was: {button} a {success}");
+        };
         
 
     }
 
+
+    
     
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) //Force charging minigame
+        if (Input.GetKeyDown(KeyCode.Z)) //Force charging minigame
         {
             Debug.Log("Forcing charge minigame");
             TransitionTo(State.CHARGING);
         }
-        if(Input.GetKeyDown(KeyCode.W)) //Force attack minigame
+        if(Input.GetKeyDown(KeyCode.X)) //Force attack minigame
         {
             Debug.Log("Forcing attack minigame");
             TransitionTo(State.ATTACKING);
         }
-        if (Input.GetKeyDown(KeyCode.E)) //Force repair minigame
+        if (Input.GetKeyDown(KeyCode.C)) //Force repair minigame
         {
             Debug.Log("Forcing repair minigame");
             TransitionTo(State.REPARING);
