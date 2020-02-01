@@ -150,7 +150,7 @@ MonoBehaviour:
   chargingMinigameButton: {fileID: 2510368565825265600}
   buttonStartPosX: 130
   buttonMiddlePosX: 0
-  buttonStagingScale: 1.3
+  buttonStagingScale: 1.5
   buttonEndPosX: -130
 --- !u!1 &5815246541649486432
 GameObject:

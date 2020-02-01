@@ -58,7 +58,7 @@ public class ChargingMinigame : Minigame
     {
         SetState(State.ButtonAnimating);
         InputButton next = AdvanceQueue();//gets you the nws dude
-        m_chargingMinigameAnimator.StartNextButtonAnimation(next, 0.5f, 0.1f, 0.3f, 0.5f);
+        m_chargingMinigameAnimator.StartNextButtonAnimation(next, 0.5f, 0.5f);
     }
 
     private void ChargingMinigameAnimator_OnButtonAnimationStateChanged(ChargingMinigameAnimator.State state)
@@ -67,8 +67,6 @@ public class ChargingMinigame : Minigame
         switch (state)
         {
             case ChargingMinigameAnimator.State.ButtonFadeIn:
-                break;
-            case ChargingMinigameAnimator.State.ButtonStaging:
                 break;
             case ChargingMinigameAnimator.State.ButtonFadeOut:
                 break;
