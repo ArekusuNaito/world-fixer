@@ -7,6 +7,7 @@ using static SharedEnums;
 
 public class Planet : MonoBehaviour
 {
+    public Balance balance;
     [RangeReactiveProperty(0,100)]
     public FloatReactiveProperty health=new FloatReactiveProperty(100);
     [RangeReactiveProperty(0,1)]
@@ -32,17 +33,19 @@ public class Planet : MonoBehaviour
 
     void Start()
     {
-        this.chargingMinigame.OnPlayerInputProcessedEvent+=(button,success)=>
-        {
-            Debug.Log($"Charge Input was: {button} a {success}");
-        };
-        
-
+        this.chargingMinigame.OnPlayerInputProcessedEvent += ChargeMinigameOutput;
     }
 
 
     
-    
+    void ChargeMinigameOutput(InputButton pressedButton,bool success)
+    {
+        Debug.Assert(this.state == State.CHARGING);
+        if(success)
+        {
+            this.AddCharge(balance.chargeAmount);
+        }
+    }
 
     void Update()
     {
