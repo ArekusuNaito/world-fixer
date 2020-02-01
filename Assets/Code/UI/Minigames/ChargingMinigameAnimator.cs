@@ -55,7 +55,7 @@ public class ChargingMinigameAnimator : MonoBehaviour
     private void SetState(State state)
     {
         Debug.Assert(state != State.Idle);
-        Debug.Log($"ChargingMinigameAnimator state: {state}");
+        //Debug.Log($"ChargingMinigameAnimator state: {state}");
         m_state = state;
         if(OnButtonAnimationStateChanged!=null)
             OnButtonAnimationStateChanged(m_state);
