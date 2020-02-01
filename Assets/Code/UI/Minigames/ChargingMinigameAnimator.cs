@@ -19,28 +19,30 @@ public class ChargingMinigameAnimator : MonoBehaviour
     //private state
     public enum State { Idle, ButtonFadeIn, ButtonStaging, ButtonFadeOut, ButtonOut };
     private State m_state = State.Idle;
+    private SharedEnums.InputButton m_inputButton;
     
     #region EVENTS FOR OUTSIDERS
     public event Action<State> OnButtonAnimationStateChanged;
     #endregion
 
     #region OUTSIDER API
-    public void AnimateNextButton(float fadeInDuration, float stagingDuration, float fadeOutDuration)
+    public void StartNextButtonAnimation(float fadeInDuration, float stagingInDuration, float stagingOutDuration, float fadeOutDuration)
     {
         Debug.Assert(fadeInDuration > 0);
-        Debug.Assert(stagingDuration > 0);
+        Debug.Assert(stagingInDuration > 0);
+        Debug.Assert(stagingOutDuration > 0);
         Debug.Assert(fadeOutDuration > 0);
         nextButton.rectTransform.anchoredPosition = new Vector2(buttonStartPosX, nextButton.rectTransform.anchoredPosition.y);
         SetState(State.ButtonFadeIn);
-        //sequence
-        Tween fadeIn = nextButton.rectTransform.DOAnchorPosX(buttonMiddlePosX, fadeInDuration);
-        fadeIn.onComplete = () => { SetState(State.ButtonStaging); };
-        /*Tween staging = nextButton.rectTransform.DOScale(buttonStagingScale)
-
-        //
         Sequence animSequence = DOTween.Sequence();
-        animSequence.Append(fadeIn);
-        */
+        //sequence
+        animSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonMiddlePosX, fadeInDuration));//fade in
+        animSequence.AppendCallback(() => { SetState(State.ButtonStaging); } );
+        animSequence.Append( nextButton.rectTransform.DOScale(buttonStagingScale, stagingInDuration));//staging in
+        animSequence.Append( nextButton.rectTransform.DOScale(1, stagingOutDuration));//staging out
+        animSequence.AppendCallback(() => { SetState(State.ButtonFadeOut); });
+        animSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonEndPosX, fadeOutDuration));//fadeout
+        animSequence.AppendCallback(() => { SetState(State.ButtonOut); });
     }
 
     #endregion
@@ -49,14 +51,21 @@ public class ChargingMinigameAnimator : MonoBehaviour
     private void SetState(State state)
     {
         Debug.Assert(state != State.Idle);
+        Debug.Log($"ChargingMinigameAnimator state: {state}");
         m_state = state;
         if(OnButtonAnimationStateChanged!=null)
             OnButtonAnimationStateChanged(m_state);
     }
+
     public State GetState()
     {
         Debug.Assert(m_state != State.Idle);
         return m_state;
+    }
+
+    public SharedEnums.InputButton GetCurrentInputButton()
+    {
+        return m_inputButton;
     }
     #endregion
 }
