@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerInputSender 
 {
-    public event Action<SharedEnums.InputButton> OnButtonPressEvent;
-    public event Action<SharedEnums.InputButton> OnButtonReleaseEvent;
-    public event Action<SharedEnums.InputButton> OnButtonEvent;
+    public event Action<SharedEnums.InputButton> OnButtonDownEvent;
+    public event Action<SharedEnums.InputButton> OnButtonUpEvent;
+    public event Action<SharedEnums.InputButton> OnButtonHoldEvent;
 }

@@ -7,6 +7,7 @@ public abstract class Minigame : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] protected MinigamesConfig m_minigamesConfig;
+    [SerializeField] protected PlayerInputSender m_playerInputSender;
 
     protected bool IsActive { get; private set; } = false;
 
