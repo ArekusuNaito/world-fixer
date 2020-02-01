@@ -9,6 +9,7 @@ public class ChargingMinigameAnimator : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Image nextButton;
+    [SerializeField] private ChargingMinigameButton chargingMinigameButton;
 
     [Header("AnimaitonConfig")]
     [SerializeField] private float buttonStartPosX;
@@ -26,12 +27,15 @@ public class ChargingMinigameAnimator : MonoBehaviour
     #endregion
 
     #region OUTSIDER API
-    public void StartNextButtonAnimation(float fadeInDuration, float stagingInDuration, float stagingOutDuration, float fadeOutDuration)
+    public void StartNextButtonAnimation(SharedEnums.InputButton btn, float fadeInDuration, float stagingInDuration, float stagingOutDuration, float fadeOutDuration)
     {
         Debug.Assert(fadeInDuration > 0);
         Debug.Assert(stagingInDuration > 0);
         Debug.Assert(stagingOutDuration > 0);
         Debug.Assert(fadeOutDuration > 0);
+        m_inputButton = btn;
+        chargingMinigameButton.SetButtonImage(m_inputButton);
+        //
         nextButton.rectTransform.anchoredPosition = new Vector2(buttonStartPosX, nextButton.rectTransform.anchoredPosition.y);
         SetState(State.ButtonFadeIn);
         Sequence animSequence = DOTween.Sequence();
@@ -65,6 +69,7 @@ public class ChargingMinigameAnimator : MonoBehaviour
 
     public SharedEnums.InputButton GetCurrentInputButton()
     {
+        Debug.Assert(m_state != State.Idle);
         return m_inputButton;
     }
     #endregion
