@@ -58,7 +58,7 @@ public class ChargingMinigame : Minigame
     {
         SetState(State.ButtonAnimating);
         InputButton next = AdvanceQueue();//gets you the nws dude
-        m_chargingMinigameAnimator.StartNextButtonAnimation(0.5f, 0.3f, 0.1f, 0.5f);
+        m_chargingMinigameAnimator.StartNextButtonAnimation(next, 0.5f, 0.1f, 0.3f, 0.5f);
     }
 
     private void ChargingMinigameAnimator_OnButtonAnimationStateChanged(ChargingMinigameAnimator.State state)
@@ -87,6 +87,8 @@ public class ChargingMinigame : Minigame
             bool success = IsPlayerInputCorrect(btn, m_chargingMinigameAnimator.GetCurrentInputButton(), m_chargingMinigameAnimator.GetState());
             if (OnPlayerInputProcessedEvent != null)
                 OnPlayerInputProcessedEvent(btn, success);
+            if (success)
+                Debug.Log("Gud");
         }
     }
 
