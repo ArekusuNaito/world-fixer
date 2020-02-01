@@ -35,7 +35,6 @@ public class Planet : MonoBehaviour
     public void Repair(float value)
     {
         this.health.Value= this.health.Value + value >100?100:this.health.Value+value;
-        
     }
 
 }

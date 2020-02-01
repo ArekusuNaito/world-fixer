@@ -64,8 +64,6 @@ public class GameMaster : MonoBehaviour
                         break;
                     }
             }
-        }
-        
     }
     public void Attack(AttackPower power,Planet targetPlanet)
     {
