@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class SharedEnums
 {
-    public enum Player { P1, P2};
+    public enum Player { P1, P2 };
 
-    public enum InputButton { A, B, X, Y };
+    public enum InputButton { A=0, B, X, Y, COUNT };
 
 }
