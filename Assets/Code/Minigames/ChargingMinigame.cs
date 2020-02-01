@@ -28,7 +28,7 @@ public class ChargingMinigame : Minigame
         m_chargingMinigameAnimator.OnButtonAnimationStateChanged += ChargingMinigameAnimator_OnButtonAnimationStateChanged;
         m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
     }
-
+    
     public override void StopMinigame()
     {
         base.StopMinigame();
@@ -58,7 +58,7 @@ public class ChargingMinigame : Minigame
     {
         SetState(State.ButtonAnimating);
         InputButton next = AdvanceQueue();//gets you the nws dude
-        m_chargingMinigameAnimator.StartNextButtonAnimation(next, 0.5f, 0.1f, 0.3f, 0.5f);
+        m_chargingMinigameAnimator.StartNextButtonAnimation(next, 0.5f, 0.5f);
     }
 
     private void ChargingMinigameAnimator_OnButtonAnimationStateChanged(ChargingMinigameAnimator.State state)
@@ -67,8 +67,6 @@ public class ChargingMinigame : Minigame
         switch (state)
         {
             case ChargingMinigameAnimator.State.ButtonFadeIn:
-                break;
-            case ChargingMinigameAnimator.State.ButtonStaging:
                 break;
             case ChargingMinigameAnimator.State.ButtonFadeOut:
                 break;
@@ -84,11 +82,12 @@ public class ChargingMinigame : Minigame
     {
         if(m_state == State.ButtonAnimating)
         {
-            bool success = IsPlayerInputCorrect(btn, m_chargingMinigameAnimator.GetCurrentInputButton(), m_chargingMinigameAnimator.GetState());
-            if (OnPlayerInputProcessedEvent != null)
-                OnPlayerInputProcessedEvent(btn, success);
-            if (success)
-                Debug.Log("Gud");
+            ChargingMinigameAnimator.EvaluationResult res = m_chargingMinigameAnimator.EvaluatePlayerInput(btn);
+            if(res!=ChargingMinigameAnimator.EvaluationResult.Ignored)
+            {
+                if (OnPlayerInputProcessedEvent != null)
+                    OnPlayerInputProcessedEvent(btn, res == ChargingMinigameAnimator.EvaluationResult.Correct);
+            }
         }
     }
 
@@ -107,19 +106,6 @@ public class ChargingMinigame : Minigame
     #endregion
 
     #region HELPERS FOR MINIGAME
-    private bool IsPlayerInputCorrect(InputButton btn, InputButton targetBtn, ChargingMinigameAnimator.State animatorState)
-    {
-        if(animatorState == ChargingMinigameAnimator.State.ButtonFadeIn ||
-            animatorState == ChargingMinigameAnimator.State.ButtonStaging || 
-            animatorState == ChargingMinigameAnimator.State.ButtonFadeOut)
-        {
-            if(btn == targetBtn)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     private InputButton GetNextButtonFromQueue()
     {

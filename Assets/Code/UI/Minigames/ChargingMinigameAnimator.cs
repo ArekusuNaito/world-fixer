@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using static SharedEnums;
 
 public class ChargingMinigameAnimator : MonoBehaviour
 {
@@ -18,37 +19,86 @@ public class ChargingMinigameAnimator : MonoBehaviour
     [SerializeField] private float buttonEndPosX;
 
     //private state
-    public enum State { Idle, ButtonFadeIn, ButtonStaging, ButtonFadeOut, ButtonOut };
+    public enum State { Idle, ButtonFadeIn, ButtonFadeOut, ButtonOut };
+    public enum EvaluationResult { Correct, Incorrect, Ignored };
     private State m_state = State.Idle;
-    private SharedEnums.InputButton m_inputButton;
-    
+    private CurrentButton m_currentButton = new CurrentButton();
+
+    //private anim sequences
+    private Sequence m_moveSequence;
+    private Sequence m_pressSequence;
+
     #region EVENTS FOR OUTSIDERS
     public event Action<State> OnButtonAnimationStateChanged;
     #endregion
 
     #region OUTSIDER API
-    public void StartNextButtonAnimation(SharedEnums.InputButton btn, float fadeInDuration, float stagingInDuration, float stagingOutDuration, float fadeOutDuration)
+    public void StartNextButtonAnimation(InputButton btn, float fadeInDuration, float fadeOutDuration)
     {
         Debug.Assert(fadeInDuration > 0);
-        Debug.Assert(stagingInDuration > 0);
-        Debug.Assert(stagingOutDuration > 0);
         Debug.Assert(fadeOutDuration > 0);
-        m_inputButton = btn;
-        chargingMinigameButton.SetButtonImage(m_inputButton);
+        m_currentButton.btn = btn;
+        m_currentButton.hasReceivedInput = false;
+        chargingMinigameButton.SetButtonImage(m_currentButton.btn);
         //
         nextButton.rectTransform.anchoredPosition = new Vector2(buttonStartPosX, nextButton.rectTransform.anchoredPosition.y);
         SetState(State.ButtonFadeIn);
-        Sequence animSequence = DOTween.Sequence();
+
+        if (m_moveSequence != null)
+            m_moveSequence.Kill();
+        m_moveSequence = DOTween.Sequence();
         //sequence
-        animSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonMiddlePosX, fadeInDuration));//fade in
-        animSequence.AppendCallback(() => { SetState(State.ButtonStaging); } );
-        animSequence.Append( nextButton.rectTransform.DOScale(buttonStagingScale, stagingInDuration));//staging in
-        animSequence.Append( nextButton.rectTransform.DOScale(1, stagingOutDuration));//staging out
-        animSequence.AppendCallback(() => { SetState(State.ButtonFadeOut); });
-        animSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonEndPosX, fadeOutDuration));//fadeout
-        animSequence.AppendCallback(() => { SetState(State.ButtonOut); });
+        m_moveSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonMiddlePosX, fadeInDuration).SetEase(Ease.OutSine));//fade in
+        m_moveSequence.AppendCallback(() => { SetState(State.ButtonFadeOut); });
+        m_moveSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonEndPosX, fadeOutDuration).SetEase(Ease.InSine));//fadeout
+        m_moveSequence.AppendCallback(() => { SetState(State.ButtonOut); });
     }
 
+    //displays visual thingies and returns if it failed or succeeded
+    public EvaluationResult EvaluatePlayerInput(InputButton btn)
+    {
+        if(m_currentButton.hasReceivedInput)
+            return EvaluationResult.Ignored;
+
+        m_currentButton.hasReceivedInput = true;
+        if (m_state == State.ButtonFadeIn ||
+            m_state == State.ButtonFadeOut)
+        {
+            if (btn == m_currentButton.btn)
+            {
+                OnSuccessfulInput();
+                return EvaluationResult.Correct;
+            }
+        }
+        OnWrongInput();
+        return EvaluationResult.Incorrect;
+    }
+
+    #endregion
+
+    #region ANIMAITON AND GOODIES
+    private void OnSuccessfulInput()
+    {
+        OnBntPressAnim();
+        GameObject effect = Spawner.Instance.Spawn(Spawner.Dude.HitBtnSuccessEffect, nextButton.transform.position);
+        effect.transform.SetParent(nextButton.transform);
+        effect.transform.localScale = Vector3.one;
+    }
+    private void OnWrongInput()
+    {
+        OnBntPressAnim();
+        GameObject effect=Spawner.Instance.Spawn(Spawner.Dude.HitBtnWrongEffect, nextButton.transform.position);
+        effect.transform.SetParent(nextButton.transform);
+        effect.transform.localScale = Vector3.one;
+    }
+    private void OnBntPressAnim()
+    {
+        if (m_pressSequence != null)
+            m_pressSequence.Kill();
+        m_pressSequence = DOTween.Sequence();
+        m_pressSequence.Append(nextButton.rectTransform.DOScale(buttonStagingScale, 0.1f));//staging in
+        m_pressSequence.Append(nextButton.rectTransform.DOScale(1, 0.3f));//staging out
+    }
     #endregion
 
     #region STATES
@@ -60,17 +110,13 @@ public class ChargingMinigameAnimator : MonoBehaviour
         if(OnButtonAnimationStateChanged!=null)
             OnButtonAnimationStateChanged(m_state);
     }
+    #endregion
 
-    public State GetState()
+    #region CURRENT BUTTON STATE
+    private class CurrentButton
     {
-        Debug.Assert(m_state != State.Idle);
-        return m_state;
-    }
-
-    public SharedEnums.InputButton GetCurrentInputButton()
-    {
-        Debug.Assert(m_state != State.Idle);
-        return m_inputButton;
+        public InputButton btn;
+        public bool hasReceivedInput;
     }
     #endregion
 }
