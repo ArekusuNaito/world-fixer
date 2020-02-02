@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: MinigamesConfig
   m_EditorClassIdentifier: 
   chargingQueueSize: 5
+  maxScoreForBad: 0.3
+  maxScoreForOk: 0.6

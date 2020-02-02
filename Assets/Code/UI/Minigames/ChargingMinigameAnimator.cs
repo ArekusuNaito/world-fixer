@@ -10,7 +10,7 @@ public class ChargingMinigameAnimator : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Image nextButton;
-    [SerializeField] private ChargingMinigameButton chargingMinigameButton;
+    [SerializeField] private MinigameButton chargingMinigameButton;
 
     [Header("AnimaitonConfig")]
     [SerializeField] private float buttonStartPosX;
