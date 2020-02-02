@@ -28,6 +28,7 @@ public class BlasterMinigame : Minigame
         hasReceivedInput = false;
         SetState(State.Reizing);
         targetButton = GetRandomInputButton();
+        blasterMinigameUI.Show();
         blasterMinigameUI.StartAnimation(targetButton, OnMinigameAnimationEnd);
         m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
     }
@@ -35,7 +36,8 @@ public class BlasterMinigame : Minigame
     public override void StopMinigame()
     {
         base.StopMinigame();
-        m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
+        blasterMinigameUI.Hide();
+        m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
     }
 
     #region PUBLIC INTERFACE

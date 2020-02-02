@@ -8,7 +8,7 @@ using static SharedEnums;
 public class ChargingMinigame : Minigame
 {
     [Header("References")]
-    [SerializeField] private ChargingMinigameAnimator m_chargingMinigameAnimator;
+    [SerializeField] private ChargingMinigameUI m_chargingMinigameUI;
 
     #region EVENTS FOR OUTSIDERS
     public event Action<InputButton, bool> OnPlayerInputProcessedEvent;
@@ -25,7 +25,8 @@ public class ChargingMinigame : Minigame
         base.StartMinigame();
         Setup();
         ShowNextButton();
-        m_chargingMinigameAnimator.OnButtonAnimationStateChanged += ChargingMinigameAnimator_OnButtonAnimationStateChanged;
+        m_chargingMinigameUI.Show();
+        m_chargingMinigameUI.OnButtonAnimationStateChanged += ChargingMinigameAnimator_OnButtonAnimationStateChanged;
         m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
     }
     
@@ -33,7 +34,8 @@ public class ChargingMinigame : Minigame
     {
         base.StopMinigame();
         SetState(State.Idle);
-        m_chargingMinigameAnimator.OnButtonAnimationStateChanged -= ChargingMinigameAnimator_OnButtonAnimationStateChanged;
+        m_chargingMinigameUI.Hide();
+        m_chargingMinigameUI.OnButtonAnimationStateChanged -= ChargingMinigameAnimator_OnButtonAnimationStateChanged;
         m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
     }
     #endregion
@@ -58,19 +60,19 @@ public class ChargingMinigame : Minigame
     {
         SetState(State.ButtonAnimating);
         InputButton next = AdvanceQueue();//gets you the nws dude
-        m_chargingMinigameAnimator.StartNextButtonAnimation(next, 0.5f, 0.5f);
+        m_chargingMinigameUI.StartNextButtonAnimation(next, 0.5f, 0.5f);
     }
 
-    private void ChargingMinigameAnimator_OnButtonAnimationStateChanged(ChargingMinigameAnimator.State state)
+    private void ChargingMinigameAnimator_OnButtonAnimationStateChanged(ChargingMinigameUI.State state)
     {
         Debug.Assert(m_state == State.ButtonAnimating);
         switch (state)
         {
-            case ChargingMinigameAnimator.State.ButtonFadeIn:
+            case ChargingMinigameUI.State.ButtonFadeIn:
                 break;
-            case ChargingMinigameAnimator.State.ButtonFadeOut:
+            case ChargingMinigameUI.State.ButtonFadeOut:
                 break;
-            case ChargingMinigameAnimator.State.ButtonOut:
+            case ChargingMinigameUI.State.ButtonOut:
                 {//Button Animation ended
                     ShowNextButton();
                 }
@@ -82,11 +84,11 @@ public class ChargingMinigame : Minigame
     {
         if(m_state == State.ButtonAnimating)
         {
-            ChargingMinigameAnimator.EvaluationResult res = m_chargingMinigameAnimator.EvaluatePlayerInput(btn);
-            if(res!=ChargingMinigameAnimator.EvaluationResult.Ignored)
+            ChargingMinigameUI.EvaluationResult res = m_chargingMinigameUI.EvaluatePlayerInput(btn);
+            if(res!=ChargingMinigameUI.EvaluationResult.Ignored)
             {
                 if (OnPlayerInputProcessedEvent != null)
-                    OnPlayerInputProcessedEvent(btn, res == ChargingMinigameAnimator.EvaluationResult.Correct);
+                    OnPlayerInputProcessedEvent(btn, res == ChargingMinigameUI.EvaluationResult.Correct);
             }
         }
     }
@@ -106,7 +108,6 @@ public class ChargingMinigame : Minigame
     #endregion
 
     #region HELPERS FOR MINIGAME
-
     private InputButton GetNextButtonFromQueue()
     {
         return m_buttonsQueue.Dequeue();

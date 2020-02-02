@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public sealed class BlasterMinigameUI : MonoBehaviour
 {
+    [SerializeField] private GameObject m_rootObject;
+
     [Header("Animation Config")]
     [SerializeField] private float targetInitialScale;
     [SerializeField] private float targetEndScale;
@@ -21,6 +23,18 @@ public sealed class BlasterMinigameUI : MonoBehaviour
     private Tween targetTween;
 
     #region EVENTS FOR OUTSIDERS
+    public void Show()
+    {
+        m_rootObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        if (targetTween != null)
+            targetTween.Kill();
+        m_rootObject.SetActive(false);
+    }
+
     public void StartAnimation(InputButton btn, System.Action onAnimationEnd)
     {
         this.callback = onAnimationEnd;
@@ -48,14 +62,9 @@ public sealed class BlasterMinigameUI : MonoBehaviour
     private void OnBntPressAnim()
     {
         Sequence sequence = DOTween.Sequence();
+        m_btnImg.rectTransform.localScale = Vector3.one;
         sequence.Append(m_btnImg.rectTransform.DOScale(1.5f, 0.1f));//staging in
         sequence.Append(m_btnImg.rectTransform.DOScale(1, 0.3f));//staging out
-    }
-
-    public void Hide()
-    {
-        if(targetTween != null)
-            targetTween.Kill();
     }
     #endregion
 

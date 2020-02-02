@@ -13,4 +13,7 @@ public class MinigamesConfig : ScriptableObject
     public float maxScoreForBad;
     [Range(0.0f, 1.0f)]
     public float maxScoreForOk;
+
+    [Header("Repair minigame")]
+    public int requiredHitsForRepair;
 }
