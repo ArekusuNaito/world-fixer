@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine.UI;
 using static SharedEnums;
 
+
 public class Planet : MonoBehaviour
 {
     public Balance balance;

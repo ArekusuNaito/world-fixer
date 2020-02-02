@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using System;
+using EZCameraShake;
 
 public class GameMaster : MonoBehaviour
 {
@@ -17,9 +18,10 @@ public class GameMaster : MonoBehaviour
     public Text lifeText;
     public Text chargeText;
 
-    
     public Text readyText;
+    [Header("UI/Feedback")]
     public GameObject readyUI;
+    public GameObject repairWarning;
     public enum AttackPower{PERFECT,OK,MISS}
     private int timeToStart = 3;
     void Awake()
@@ -45,7 +47,10 @@ public class GameMaster : MonoBehaviour
         
     }
 
+    void SpawnRepairWarning()
+    {
 
+    }
     void StartGame()
     {
         readyUI.SetActive(false);
@@ -57,15 +62,15 @@ public class GameMaster : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Attack(AttackPower.OK,player2);
+            CameraShaker.Instance.ShakeOnce(0.5f, 1f, 0.1f, 0.4f);   
         }
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Attack(AttackPower.OK, player2);
+            
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Attack(AttackPower.OK, player1);
+            
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
@@ -75,14 +80,6 @@ public class GameMaster : MonoBehaviour
         {
             Repair(player2);
         }
-    }
-
-    
-    
-    public void Attack(AttackPower power,Planet targetPlanet)
-    {
-        
-        targetPlanet.Hurt(damage);
     }
 
       

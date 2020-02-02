@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
-public class FixWarning : MonoBehaviour
+
+public class ResultsPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [Range(0,1500)]
+    public float flashInterval=400;
+    public GameObject player1Panel;
+    public GameObject player2Panel;
+
     
-    public float intervalTime=350;
+
     void Start()
     {
         CreateFlashInterval();
@@ -15,12 +20,12 @@ public class FixWarning : MonoBehaviour
 
     void CreateFlashInterval()
     {
-        var intervalFlash = Observable.Interval(TimeSpan.FromMilliseconds(intervalTime));
+        var intervalFlash = Observable.Interval(TimeSpan.FromMilliseconds(flashInterval))
+        .DelaySubscription(TimeSpan.FromMilliseconds(flashInterval));
+
         intervalFlash.Subscribe(_ =>
         {
             this.gameObject.SetActive(!this.gameObject.activeSelf);
         }).AddTo(this);
     }
-
-    
 }
