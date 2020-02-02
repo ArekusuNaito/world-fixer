@@ -79,6 +79,7 @@ public class BlasterMinigame : Minigame
     private void RaiseMinigameEndEvent(Result res)
     {
         blasterMinigameUI.OnMinigameEnd(res);
+        Debug.Log($"Blaster end:{res}");
         if (OnMinigameEndEvent != null)
             OnMinigameEndEvent(res);
     }
