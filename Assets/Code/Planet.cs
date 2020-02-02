@@ -16,8 +16,7 @@ public class Planet : MonoBehaviour
     public FloatReactiveProperty charge = new FloatReactiveProperty(1);
     public enum State { CHARGING, ATTACKING, REPARING, IDLE }//WIN/LOSE
 
-    public Text healthText;
-    public Text chargeText;
+    public HealthBar healthBar;
 
     public State state=State.IDLE;
     public Minigame activeMinigame;
@@ -30,8 +29,12 @@ public class Planet : MonoBehaviour
 
     void Awake()
     {
-        this.health.SubscribeToText(healthText);
-        this.charge.SubscribeToText(chargeText);
+        
+        this.health.Subscribe(newValue=>
+        {
+            Debug.Log($"New Value: {newValue}");
+            healthBar.Animate(newValue);
+        });
         TransitionTo(State.IDLE);
         
     }

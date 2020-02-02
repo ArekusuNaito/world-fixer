@@ -21,8 +21,6 @@ public class GameMaster : MonoBehaviour
     public AudioSource musicChannel;
     public AudioSource bgsChannel;
     [Header("UI")]
-    public Text lifeText;
-    public Text chargeText;
 
     public Text readyText;
     public Image healthBar;
@@ -79,6 +77,7 @@ public class GameMaster : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
+
         }
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
