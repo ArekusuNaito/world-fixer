@@ -121,9 +121,9 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &257779370 stripped
+--- !u!114 &325539164 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 346969406505175452, guid: 5fdb0a02f769c7145a0485c57294cff8,
+  m_CorrespondingSourceObject: {fileID: 5255447680039793472, guid: 5fdb0a02f769c7145a0485c57294cff8,
     type: 3}
   m_PrefabInstance: {fileID: 7966516291951586184}
   m_PrefabAsset: {fileID: 0}
@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc15132bf6b941049bd3b04e61705a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1710072209 stripped
+--- !u!114 &1501033844 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5255447680039793472, guid: 5fdb0a02f769c7145a0485c57294cff8,
+  m_CorrespondingSourceObject: {fileID: 346969406505175452, guid: 5fdb0a02f769c7145a0485c57294cff8,
     type: 3}
   m_PrefabInstance: {fileID: 7966516291951586184}
   m_PrefabAsset: {fileID: 0}
@@ -185,11 +185,11 @@ PrefabInstance:
     - target: {fileID: 783937509, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
       propertyPath: planet
       value: 
-      objectReference: {fileID: 257779370}
+      objectReference: {fileID: 1501033844}
     - target: {fileID: 2125656216, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
       propertyPath: planet
       value: 
-      objectReference: {fileID: 1710072209}
+      objectReference: {fileID: 325539164}
     - target: {fileID: 558890202470728450, guid: 00ad376b0a6cd85489a7568c48d201b1,
         type: 3}
       propertyPath: m_LocalPosition.x
