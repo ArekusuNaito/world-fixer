@@ -25,9 +25,11 @@ public class GameMaster : MonoBehaviour
     public Text readyText;
     public Image healthBar;
     public GameObject readyUI;
+    public GameOverPanel gameOverPanel;
     public GameObject repairWarning;
-    public enum AttackPower{PERFECT,OK,MISS}
     private int timeToStart = 3;
+
+    
 
     public static AudioDatabase audioDB;
     void Awake()
@@ -40,7 +42,8 @@ public class GameMaster : MonoBehaviour
         } else Destroy(this);
         player1.Enemy=player2;
         player2.Enemy = player1;
-        
+        player1.GameOver = GameOver;
+        player2.GameOver = GameOver;
 
     }
     void Start()
@@ -71,6 +74,29 @@ public class GameMaster : MonoBehaviour
         player1.TransitionTo(Planet.State.CHARGING);
         player2.TransitionTo(Planet.State.CHARGING);
         //SFX Here?
+        //Debug force game over after start
+        //You have to know who wins and which side that player is
+        // GameOver(player1,player2);  
+        // GameOver(winner:player2,loser:player1);
+    }
+
+    void GameOver(Planet winner, Planet loser)
+    {
+        winner.TransitionTo(Planet.State.IDLE);
+        loser.TransitionTo(Planet.State.IDLE);
+        //Inits game over anim
+        if(winner==player1)
+        {
+            this.gameOverPanel.SetLeftRightIcons();
+        }
+        else
+        {
+            this.gameOverPanel.SetRightLeft();
+        }
+
+        this.gameOverPanel.Execute();
+        
+
     }
 
     void Update()

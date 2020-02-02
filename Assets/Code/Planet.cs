@@ -24,6 +24,7 @@ public class Planet : MonoBehaviour
     public BlasterMinigame attackMinigame;
     public RepairMinigame repairMinigame;
     private Planet enemy;
+    public System.Action<Planet,Planet> GameOver;
 
     [SerializeField] private PlanetUI planetUI;
 
@@ -137,7 +138,7 @@ public class Planet : MonoBehaviour
     }
 
     public bool IsFullCharged{get{return this.charge.Value>=1;}}
-
+    public bool IsDead{get{return this.health.Value<=0;}}
 
     public void AddCharge(float value)
     {
@@ -148,6 +149,10 @@ public class Planet : MonoBehaviour
     {
         this.health.Value-=damage;
         this.TransitionTo(State.REPARING);
+        if (this.IsDead)
+        {
+            this.GameOver(this.enemy,this);
+        }
     }
 
     public void Repair(float value)
