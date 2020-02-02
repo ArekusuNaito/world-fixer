@@ -46,6 +46,7 @@ public sealed class RepairMinigame : Minigame
             {
                 repairCounter++;
                 repairMinigameUI.OnButtonTap(correctTap:true);
+                GameMaster.PlaySFX(GameMaster.audioDB.repairA);
                 if(repairCounter>=m_minigamesConfig.requiredHitsForRepair)
                 {
                     SetState(State.Idle);

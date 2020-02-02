@@ -99,6 +99,7 @@ public class ChargingMinigameUI : MonoBehaviour
         GameObject effect = Spawner.Instance.Spawn(Spawner.Dude.HitBtnSuccessEffect, nextButton.transform.position);
         effect.transform.SetParent(nextButton.transform);
         effect.transform.localScale = Vector3.one;
+        GameMaster.PlayRandomPitchSFX(GameMaster.audioDB.chargeSuccess);
     }
     private void OnWrongInput()
     {
@@ -106,6 +107,7 @@ public class ChargingMinigameUI : MonoBehaviour
         GameObject effect=Spawner.Instance.Spawn(Spawner.Dude.HitBtnWrongEffect, nextButton.transform.position);
         effect.transform.SetParent(nextButton.transform);
         effect.transform.localScale = Vector3.one;
+        GameMaster.PlayRandomPitchSFX(GameMaster.audioDB.chargeFail);
     }
     private void OnBntPressAnim()
     {

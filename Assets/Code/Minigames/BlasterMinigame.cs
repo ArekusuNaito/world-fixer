@@ -76,8 +76,19 @@ public class BlasterMinigame : Minigame
         m_state = state;
     }
 
+    void PlayInputAudio(Result result)
+    {
+        switch(result)
+        {
+            case Result.Perfect: GameMaster.PlaySFX(GameMaster.audioDB.laserCharging); break;
+            case Result.Ok: GameMaster.PlaySFX(GameMaster.audioDB.chargeSuccess); break;
+            case Result.Bad: GameMaster.PlaySFX(GameMaster.audioDB.chargeMiss); break;
+            default: GameMaster.PlaySFX(GameMaster.audioDB.chargeMiss); break;
+        }
+    }
     private void RaiseMinigameEndEvent(Result res)
     {
+        PlayInputAudio(res);
         blasterMinigameUI.OnMinigameEnd(res);
         Debug.Log($"Blaster end:{res}");
         if (OnMinigameEndEvent != null)

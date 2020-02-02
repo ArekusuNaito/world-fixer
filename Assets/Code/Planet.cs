@@ -10,8 +10,8 @@ using static BlasterMinigame;
 public class Planet : MonoBehaviour
 {
     public Balance balance;
-    [RangeReactiveProperty(0,100)]
-    public FloatReactiveProperty health=new FloatReactiveProperty(100);
+    [RangeReactiveProperty(0,1)]
+    public FloatReactiveProperty health=new FloatReactiveProperty(1);
     [RangeReactiveProperty(0,1)]
     public FloatReactiveProperty charge = new FloatReactiveProperty(1);
     public enum State { CHARGING, ATTACKING, REPARING, IDLE }//WIN/LOSE
