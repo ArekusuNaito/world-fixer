@@ -13,6 +13,8 @@ public class Balance : ScriptableObject
     public float perfectDamage = 20f;
     [Range(0, 100)]
     public float okDamage = 10f;
+    [Range(0, 100)]
+    public float badDamage = 10f;
 
     [Header("Repair")]
     [Range(0, 100)]

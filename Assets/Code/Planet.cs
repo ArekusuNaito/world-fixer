@@ -22,6 +22,7 @@ public class Planet : MonoBehaviour
     public ChargingMinigame chargingMinigame;
     public Minigame attackMinigame;
     public Minigame repairMinigame;
+    private Planet enemy;
     
     void Awake()
     {
@@ -36,7 +37,7 @@ public class Planet : MonoBehaviour
         this.chargingMinigame.OnPlayerInputProcessedEvent += ChargeMinigameOutput;
     }
 
-
+    public Planet Enemy{set{this.enemy=value;}}
     
     void ChargeMinigameOutput(InputButton pressedButton,bool success)
     {
@@ -44,7 +45,41 @@ public class Planet : MonoBehaviour
         if(success)
         {
             this.AddCharge(balance.chargeAmount);
+            if(IsFullCharged)
+            {
+                Debug.Assert(this.enemy!=null,$"{this.name} has no enemy");
+                this.TransitionTo(State.ATTACKING); 
+            }
         }
+    }
+
+    //REMOOVE THIS ~ Only useful while JP works on his thing!!
+    public enum Result { NoInput, Bad, Ok, Perfect };
+
+
+    void AttackMinigameOutput(Result result)
+    {
+        var damage = TranslateAttackResultToFloat(result);
+        //Animation can be placed here
+        //SFX can be placed here
+        enemy.Hurt(damage);
+    }
+
+    void RepairMinigameOutput()
+    {
+        this.Repair(balance.repairAmount);
+    }
+
+    private float TranslateAttackResultToFloat(Result attackPower)
+    {
+        switch (attackPower)
+        {
+            case Result.Perfect: return balance.perfectDamage;
+            case Result.Ok: return balance.okDamage;
+            case Result.Bad: return balance.badDamage;
+        }
+        Debug.Log("No Damage translation");
+        return 0; //default is to not receive damage
     }
 
     void Update()
@@ -66,7 +101,7 @@ public class Planet : MonoBehaviour
         }
     }
     
-    void TransitionTo(State newState)
+    public void TransitionTo(State newState)
     {
         if (state != State.IDLE) //This could potentially create issues, YET JAM
         {
@@ -83,6 +118,7 @@ public class Planet : MonoBehaviour
             }
             case State.ATTACKING:
             {
+                this.charge.Value=0;
                 this.activeMinigame = this.attackMinigame;
                 break;
             }
@@ -104,6 +140,8 @@ public class Planet : MonoBehaviour
         }
 
     }
+
+    public bool IsFullCharged{get{return this.charge.Value>=1;}}
 
 
     public void AddCharge(float value)
