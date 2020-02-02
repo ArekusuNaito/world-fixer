@@ -121,12 +121,60 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &257779370 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 346969406505175452, guid: 5fdb0a02f769c7145a0485c57294cff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966516291951586184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed3a80a47bcf9240a440f70702af333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &519420031 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8703050449583594884, guid: d5363c790c43eba4bbcd6c4eec6da024,
     type: 3}
   m_PrefabInstance: {fileID: 8703050449677084155}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &783937509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 783937509, guid: 00ad376b0a6cd85489a7568c48d201b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 558890203258696175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc15132bf6b941049bd3b04e61705a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1710072209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5255447680039793472, guid: 5fdb0a02f769c7145a0485c57294cff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966516291951586184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed3a80a47bcf9240a440f70702af333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2125656216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2125656216, guid: 00ad376b0a6cd85489a7568c48d201b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 558890203258696175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc15132bf6b941049bd3b04e61705a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &558890203258696175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +182,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783937509, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
+      propertyPath: planet
+      value: 
+      objectReference: {fileID: 257779370}
+    - target: {fileID: 2125656216, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
+      propertyPath: planet
+      value: 
+      objectReference: {fileID: 1710072209}
     - target: {fileID: 558890202470728450, guid: 00ad376b0a6cd85489a7568c48d201b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -406,6 +462,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 346969406505175452, guid: 5fdb0a02f769c7145a0485c57294cff8,
+        type: 3}
+      propertyPath: planetUI
+      value: 
+      objectReference: {fileID: 783937509}
     - target: {fileID: 766283271573496578, guid: 5fdb0a02f769c7145a0485c57294cff8,
         type: 3}
       propertyPath: m_Camera
@@ -516,6 +577,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5255447680039793472, guid: 5fdb0a02f769c7145a0485c57294cff8,
+        type: 3}
+      propertyPath: planetUI
+      value: 
+      objectReference: {fileID: 2125656216}
     - target: {fileID: 8304227847946893788, guid: 5fdb0a02f769c7145a0485c57294cff8,
         type: 3}
       propertyPath: m_Name

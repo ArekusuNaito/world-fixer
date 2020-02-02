@@ -25,7 +25,9 @@ public class Planet : MonoBehaviour
     public BlasterMinigame attackMinigame;
     public RepairMinigame repairMinigame;
     private Planet enemy;
-    
+
+    [SerializeField] private PlanetUI planetUI;
+
     void Awake()
     {
         this.health.SubscribeToText(healthText);
@@ -64,10 +66,8 @@ public class Planet : MonoBehaviour
         var damage = TranslateAttackResultToFloat(result);
         //Animation can be placed here
         //SFX can be placed here
-        enemy.Hurt(damage);
-        this.enemy.TransitionTo(State.REPARING);
+        planetUI.ShootAtTarget(enemy.GetPlanetUI().transform.position, damage);//instad of: enemy.Hurt(damage);
         this.TransitionTo(State.CHARGING);
-
     }
 
     void RepairMinigameOutput()
@@ -144,11 +144,17 @@ public class Planet : MonoBehaviour
     public void Hurt(float damage)
     {
         this.health.Value-=damage;
+        this.TransitionTo(State.REPARING);
     }
 
     public void Repair(float value)
     {
         this.health.Value= this.health.Value + value >100?100:this.health.Value+value;
+    }
+
+    public PlanetUI GetPlanetUI()
+    {
+        return planetUI;
     }
 
 }

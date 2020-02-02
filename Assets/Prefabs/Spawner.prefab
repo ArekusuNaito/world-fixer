@@ -47,3 +47,8 @@ MonoBehaviour:
     type: 3}
   HitBtnWrongEffect: {fileID: 3319113389306405983, guid: babf8fb5a020a13429266407fba17a5a,
     type: 3}
+  BlasterShootParticles: {fileID: 8955366002818609907, guid: 3a7feeff29260aa48b8e6076d3dbed46,
+    type: 3}
+  SmokeImpactParticles: {fileID: 8955366002818609907, guid: 91ca26f2cef00c84a8e7a995ad792680,
+    type: 3}
+  Bullet: {fileID: 3171569437496720217, guid: 193e114c5dad76b4e907d13aa1984160, type: 3}

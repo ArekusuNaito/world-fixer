@@ -34,7 +34,7 @@ public sealed class RepairMinigame : Minigame
     {
         base.StopMinigame();
         repairMinigameUI.Hide();
-        m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
+        m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
     }
 
     #region MINIGAME

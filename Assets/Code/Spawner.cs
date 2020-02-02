@@ -15,11 +15,17 @@ public class Spawner : MonoBehaviour
     public enum Dude
     {
         HitBtnSuccessEffect,
-        HitBtnWrongEffect
+        HitBtnWrongEffect,
+        BlasterShootParticles,
+        SmokeImpactParticles,
+        Bullet
     }
 
     [SerializeField] private GameObject HitBtnSuccessEffect;
     [SerializeField] private GameObject HitBtnWrongEffect;
+    [SerializeField] private GameObject BlasterShootParticles;
+    [SerializeField] private GameObject SmokeImpactParticles;
+    [SerializeField] private GameObject Bullet;
 
     public GameObject Spawn(Dude dude)
     {
@@ -39,6 +45,12 @@ public class Spawner : MonoBehaviour
                 return HitBtnSuccessEffect;
             case Dude.HitBtnWrongEffect:
                 return HitBtnWrongEffect;
+            case Dude.BlasterShootParticles:
+                return BlasterShootParticles;
+            case Dude.SmokeImpactParticles:
+                return SmokeImpactParticles;
+            case Dude.Bullet:
+                return Bullet;
             default:
                 throw new System.NotImplementedException();
         }

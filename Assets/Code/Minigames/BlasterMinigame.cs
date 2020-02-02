@@ -37,7 +37,7 @@ public class BlasterMinigame : Minigame
     {
         base.StopMinigame();
         blasterMinigameUI.Hide();
-        m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
+        m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
     }
 
     #region PUBLIC INTERFACE
