@@ -24,6 +24,7 @@ public class ChargingMinigame : Minigame
     {
         base.StartMinigame();
         Setup();
+        SetState(State.ButtonAnimating);
         ShowNextButton();
         m_chargingMinigameUI.Show();
         m_chargingMinigameUI.OnButtonAnimationStateChanged += ChargingMinigameAnimator_OnButtonAnimationStateChanged;
@@ -34,9 +35,9 @@ public class ChargingMinigame : Minigame
     {
         base.StopMinigame();
         SetState(State.Idle);
-        m_chargingMinigameUI.Hide();
         m_chargingMinigameUI.OnButtonAnimationStateChanged -= ChargingMinigameAnimator_OnButtonAnimationStateChanged;
         m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
+        m_chargingMinigameUI.Hide();
     }
     #endregion
 
@@ -58,7 +59,6 @@ public class ChargingMinigame : Minigame
     #region MINIGAME LOGIC
     private void ShowNextButton()
     {
-        SetState(State.ButtonAnimating);
         InputButton next = AdvanceQueue();//gets you the nws dude
         m_chargingMinigameUI.StartNextButtonAnimation(next, 0.5f, 0.5f);
     }
