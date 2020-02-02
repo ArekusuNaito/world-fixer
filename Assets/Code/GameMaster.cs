@@ -56,6 +56,7 @@ public class GameMaster : MonoBehaviour
         readyUI.SetActive(false);
         player1.TransitionTo(Planet.State.CHARGING);
         player2.TransitionTo(Planet.State.CHARGING);
+        //SFX Here?
     }
 
     void Update()
