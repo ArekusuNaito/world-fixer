@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8441a961adcf741a5f39a07bd2205b, type: 3}
   m_Name: Balancing
   m_EditorClassIdentifier: 
-  chargeAmount: 0.5
-  perfectDamage: 0.1
-  okDamage: 0.1
+  chargeAmount: 0.25
+  perfectDamage: 0.33
+  okDamage: 0.2
   badDamage: 0.1
-  repairAmount: 8
+  repairAmount: 0.2

@@ -18,6 +18,8 @@ public class Planet : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public Player playerNumber;
+
     public State state=State.IDLE;
     public Minigame activeMinigame;
     public ChargingMinigame chargingMinigame;
@@ -30,7 +32,6 @@ public class Planet : MonoBehaviour
 
     void Awake()
     {
-        
         this.health.Subscribe(newValue=>
         {
             Debug.Log($"New Value: {newValue}");
@@ -142,6 +143,7 @@ public class Planet : MonoBehaviour
             case State.REPARING:
             {
                 this.activeMinigame = this.repairMinigame;
+                    repairMinigame.IamPlayer(playerNumber);
                 break;
             }
             case State.IDLE:

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using static SharedEnums;
+using XInputDotNetPure;
 
 public sealed class RepairMinigame : Minigame
 {
@@ -18,6 +19,8 @@ public sealed class RepairMinigame : Minigame
     private State m_state = State.Idle;
 
     private int repairCounter;
+
+    Player myPlayer;
 
     public override void StartMinigame()
     {
@@ -38,6 +41,13 @@ public sealed class RepairMinigame : Minigame
         base.StopMinigame();
         repairMinigameUI.Hide();
         m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
+        GamePad.SetVibration((PlayerIndex)myPlayer, 0, 0);
+    }
+
+    public void IamPlayer(Player player)
+    {
+        this.myPlayer = player;
+        GamePad.SetVibration((PlayerIndex)player, 1, 1);
     }
 
     #region MINIGAME
