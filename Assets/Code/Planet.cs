@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using static SharedEnums;
+using static BlasterMinigame;
 
 
 public class Planet : MonoBehaviour
@@ -21,8 +22,8 @@ public class Planet : MonoBehaviour
     public State state=State.IDLE;
     public Minigame activeMinigame;
     public ChargingMinigame chargingMinigame;
-    public Minigame attackMinigame;
-    public Minigame repairMinigame;
+    public BlasterMinigame attackMinigame;
+    public RepairMinigame repairMinigame;
     private Planet enemy;
     
     void Awake()
@@ -36,6 +37,8 @@ public class Planet : MonoBehaviour
     void Start()
     {
         this.chargingMinigame.OnPlayerInputProcessedEvent += ChargeMinigameOutput;
+        this.attackMinigame.OnMinigameEndEvent+=AttackMinigameOutput;
+        this.repairMinigame.OnRepairEnd+=RepairMinigameOutput;
     }
 
     public Planet Enemy{set{this.enemy=value;}}
@@ -54,8 +57,6 @@ public class Planet : MonoBehaviour
         }
     }
 
-    //REMOOVE THIS ~ Only useful while JP works on his thing!!
-    public enum Result { NoInput, Bad, Ok, Perfect };
 
 
     void AttackMinigameOutput(Result result)
@@ -64,11 +65,15 @@ public class Planet : MonoBehaviour
         //Animation can be placed here
         //SFX can be placed here
         enemy.Hurt(damage);
+        this.enemy.TransitionTo(State.REPARING);
+        this.TransitionTo(State.CHARGING);
+
     }
 
     void RepairMinigameOutput()
     {
         this.Repair(balance.repairAmount);
+        this.TransitionTo(State.CHARGING);
     }
 
     private float TranslateAttackResultToFloat(Result attackPower)
@@ -85,21 +90,7 @@ public class Planet : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) //Force charging minigame
-        {
-            Debug.Log("Forcing charge minigame");
-            TransitionTo(State.CHARGING);
-        }
-        if(Input.GetKeyDown(KeyCode.X)) //Force attack minigame
-        {
-            Debug.Log("Forcing attack minigame");
-            TransitionTo(State.ATTACKING);
-        }
-        if (Input.GetKeyDown(KeyCode.C)) //Force repair minigame
-        {
-            Debug.Log("Forcing repair minigame");
-            TransitionTo(State.REPARING);
-        }
+        
     }
     
     public void TransitionTo(State newState)
