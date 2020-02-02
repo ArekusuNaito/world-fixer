@@ -55,10 +55,11 @@ public class Planet : MonoBehaviour
         if(success)
         {
             this.AddCharge(balance.chargeAmount);
+            planetUI.blasterUI.SetChargeState(charge.Value);
             if(IsFullCharged)
             {
                 Debug.Assert(this.enemy!=null,$"{this.name} has no enemy");
-                this.TransitionTo(State.ATTACKING); 
+                this.TransitionTo(State.ATTACKING);
             }
         }
     }
@@ -70,6 +71,7 @@ public class Planet : MonoBehaviour
         var damage = TranslateAttackResultToFloat(result);
         //Animation can be placed here
         //SFX can be placed here
+        planetUI.blasterUI.SetChargeState(charge.Value);
         planetUI.ShootAtTarget(enemy.GetPlanetUI().transform.position, damage);//instad of: enemy.Hurt(damage);
         this.TransitionTo(State.CHARGING);
     }
@@ -134,7 +136,7 @@ public class Planet : MonoBehaviour
         {
             this.activeMinigame.StartMinigame();
         }
-
+        planetUI.OnTransitionedToState(this.state);
     }
 
     public bool IsFullCharged{get{return this.charge.Value>=1;}}

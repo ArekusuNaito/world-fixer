@@ -9,7 +9,7 @@ public abstract class Minigame : MonoBehaviour
     [SerializeField] protected MinigamesConfig m_minigamesConfig;
     [SerializeField] protected PlayerInputSender m_playerInputSender;
 
-    protected bool IsActive { get; private set; } = false;
+    public bool IsActive { get; private set; } = false;
 
     public virtual void StartMinigame()
     {

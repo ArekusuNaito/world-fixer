@@ -139,6 +139,24 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 8703050449677084155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &561183007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2649535047869729250, guid: 5fdb0a02f769c7145a0485c57294cff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966516291951586184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &561183008
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561183007}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &783937509 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 783937509, guid: 00ad376b0a6cd85489a7568c48d201b1,
@@ -151,6 +169,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc15132bf6b941049bd3b04e61705a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1205935134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2649535048458014471, guid: 5fdb0a02f769c7145a0485c57294cff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966516291951586184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1205935135
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205935134}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1710072209 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5255447680039793472, guid: 5fdb0a02f769c7145a0485c57294cff8,
@@ -577,6 +613,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4445101307488820828, guid: 5fdb0a02f769c7145a0485c57294cff8,
+        type: 3}
+      propertyPath: nextButtonCanvasGroup
+      value: 
+      objectReference: {fileID: 1205935135}
+    - target: {fileID: 4445101307967985849, guid: 5fdb0a02f769c7145a0485c57294cff8,
+        type: 3}
+      propertyPath: nextButtonCanvasGroup
+      value: 
+      objectReference: {fileID: 561183008}
     - target: {fileID: 5255447680039793472, guid: 5fdb0a02f769c7145a0485c57294cff8,
         type: 3}
       propertyPath: planetUI

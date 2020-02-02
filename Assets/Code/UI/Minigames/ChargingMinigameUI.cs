@@ -11,6 +11,7 @@ public class ChargingMinigameUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private GameObject m_rootObject;
     [SerializeField] private Image nextButton;
+    [SerializeField] private CanvasGroup nextButtonCanvasGroup;
     [SerializeField] private MinigameButton chargingMinigameButton;
 
     [Header("AnimaitonConfig")]
@@ -58,15 +59,19 @@ public class ChargingMinigameUI : MonoBehaviour
         chargingMinigameButton.SetButtonImage(m_currentButton.btn);
         //
         nextButton.rectTransform.anchoredPosition = new Vector2(buttonStartPosX, nextButton.rectTransform.anchoredPosition.y);
+        nextButtonCanvasGroup.alpha = 0;
         SetState(State.ButtonFadeIn);
 
         if (m_moveSequence != null)
             m_moveSequence.Kill();
         m_moveSequence = DOTween.Sequence();
+
         //sequence
         m_moveSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonMiddlePosX, fadeInDuration).SetEase(Ease.OutSine));//fade in
+        m_moveSequence.Insert(0, nextButtonCanvasGroup.DOFade(1, 0.2f));
         m_moveSequence.AppendCallback(() => { SetState(State.ButtonFadeOut); });
         m_moveSequence.Append(nextButton.rectTransform.DOAnchorPosX(buttonEndPosX, fadeOutDuration).SetEase(Ease.InSine));//fadeout
+        m_moveSequence.Insert(fadeInDuration, nextButtonCanvasGroup.DOFade(0,fadeOutDuration));
         m_moveSequence.AppendCallback(() => { SetState(State.ButtonOut); });
     }
 

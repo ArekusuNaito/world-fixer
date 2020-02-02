@@ -68,6 +68,12 @@ public sealed class RepairMinigame : Minigame
     }
     #endregion
 
+    public InputButton GetTargetButton()
+    {
+        Debug.Assert(IsActive);
+        return targetButton;
+    }
+
     private void SetState(State state)
     {
         m_state = state;
