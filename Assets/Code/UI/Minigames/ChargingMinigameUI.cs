@@ -38,6 +38,7 @@ public class ChargingMinigameUI : MonoBehaviour
     public void Show()
     {
         m_rootObject.SetActive(true);
+        ShowIdle();
     }
 
     public void Hide()
@@ -50,6 +51,18 @@ public class ChargingMinigameUI : MonoBehaviour
         m_rootObject.SetActive(false);
     }
 
+    private void ShowIdle()
+    {
+        SetState(State.Idle);
+        //reset
+        nextButton.rectTransform.anchoredPosition = new Vector2(buttonStartPosX, nextButton.rectTransform.anchoredPosition.y);
+        nextButtonCanvasGroup.alpha = 0;
+        nextButton.rectTransform.localScale = Vector3.one;
+
+        //nextButtonCanvasGroup.DOFade(0.5f, 1);
+        chargingMinigameButton.SetUnkwnownState();
+    }
+
     public void StartNextButtonAnimation(InputButton btn, float fadeInDuration, float fadeOutDuration)
     {
         Debug.Assert(fadeInDuration > 0);
@@ -60,6 +73,8 @@ public class ChargingMinigameUI : MonoBehaviour
         //
         nextButton.rectTransform.anchoredPosition = new Vector2(buttonStartPosX, nextButton.rectTransform.anchoredPosition.y);
         nextButtonCanvasGroup.alpha = 0;
+        nextButton.rectTransform.localScale = Vector3.one;
+        //staging in
         SetState(State.ButtonFadeIn);
 
         if (m_moveSequence != null)

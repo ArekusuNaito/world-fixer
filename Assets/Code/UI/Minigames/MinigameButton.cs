@@ -11,4 +11,9 @@ public class MinigameButton : MonoBehaviour
     {
         buttonText.text = btn.ToString();
     }
+
+    public void SetUnkwnownState()
+    {
+        buttonText.text = "?";
+    }
 }

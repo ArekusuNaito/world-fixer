@@ -25,10 +25,11 @@ public class ChargingMinigame : Minigame
         base.StartMinigame();
         Setup();
         SetState(State.ButtonAnimating);
-        ShowNextButton();
         m_chargingMinigameUI.Show();
         m_chargingMinigameUI.OnButtonAnimationStateChanged += ChargingMinigameAnimator_OnButtonAnimationStateChanged;
         m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
+
+        StartCoroutine(ShowNextAfterDelay(1));
     }
     
     public override void StopMinigame()
@@ -57,6 +58,12 @@ public class ChargingMinigame : Minigame
     #endregion
 
     #region MINIGAME LOGIC
+    private IEnumerator ShowNextAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ShowNextButton();
+    }
+
     private void ShowNextButton()
     {
         InputButton next = AdvanceQueue();//gets you the nws dude

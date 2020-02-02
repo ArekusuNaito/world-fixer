@@ -21,13 +21,16 @@ public sealed class RepairMinigame : Minigame
 
     public override void StartMinigame()
     {
-        base.StartMinigame();
-        targetButton = GetRandomInputButton();
-        SetState(State.Repairing);
-        repairCounter = 0;
-        repairMinigameUI.Show();
-        repairMinigameUI.OnMinigameStart(targetButton);
-        m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
+        if(!IsActive)
+        {
+            base.StartMinigame();
+            targetButton = GetRandomInputButton();
+            SetState(State.Repairing);
+            repairCounter = 0;
+            repairMinigameUI.Show();
+            repairMinigameUI.OnMinigameStart(targetButton);
+            m_playerInputSender.OnButtonDownEvent += PlayerInput_OnButtonDownEvent;
+        }
     }
 
     public override void StopMinigame()

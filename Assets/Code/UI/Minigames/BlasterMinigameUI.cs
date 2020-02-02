@@ -10,10 +10,12 @@ public sealed class BlasterMinigameUI : MonoBehaviour
     [SerializeField] private GameObject m_rootObject;
 
     [Header("Animation Config")]
+    [SerializeField] private float fadeInDuration;
     [SerializeField] private float targetInitialScale;
     [SerializeField] private float targetEndScale;
     [SerializeField] private float scaleDuration;
 
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private MinigameButton m_btn;
     [SerializeField] private Image m_btnImg;
     [SerializeField] private RectTransform targetImage;
@@ -86,7 +88,12 @@ public sealed class BlasterMinigameUI : MonoBehaviour
     private void AnimateCircle()
     {
         targetImage.transform.localScale = new Vector3(targetInitialScale, targetInitialScale, targetInitialScale);
+
+        canvasGroup.alpha = 0;
+        canvasGroup.DOFade(1, fadeInDuration);
+
         targetTween = targetImage.transform.DOScale(targetEndScale, scaleDuration);
+        targetTween.SetEase(Ease.InOutSine);
         targetTween.onComplete = OnCircleScaleComplete;
     }
 

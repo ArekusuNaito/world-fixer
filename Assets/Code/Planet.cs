@@ -101,6 +101,8 @@ public class Planet : MonoBehaviour
     
     public void TransitionTo(State newState)
     {
+        if (state == newState)
+            return;
         if (state != State.IDLE) //This could potentially create issues, YET JAM
         {
             this.activeMinigame.StopMinigame();

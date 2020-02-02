@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Balancing
   m_EditorClassIdentifier: 
   chargeAmount: 0.5
-  perfectDamage: 20
-  okDamage: 10
-  badDamage: 5
+  perfectDamage: 0.1
+  okDamage: 0.1
+  badDamage: 0.1
   repairAmount: 8
