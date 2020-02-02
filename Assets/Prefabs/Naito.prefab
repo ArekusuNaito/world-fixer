@@ -275,6 +275,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7976951685586762171}
   - component: {fileID: 2765730830859646253}
+  - component: {fileID: 1069174169}
+  - component: {fileID: 1069174170}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -308,12 +310,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed3a80a47bcf9240a440f70702af333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  balance: {fileID: 11400000, guid: 1aba2d8231e9f5d4a83b7ded927a825f, type: 2}
   health:
     value: 100
   charge:
     value: 1
   healthText: {fileID: 5394432348417079238}
   chargeText: {fileID: 2434063423927333006}
+  state: 3
+  activeMinigame: {fileID: 0}
+  chargingMinigame: {fileID: 1069174169}
+  attackMinigame: {fileID: 0}
+  repairMinigame: {fileID: 0}
+--- !u!114 &1069174169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674528888418035454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa9f4653eadb3f4686989ccf6c7e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minigamesConfig: {fileID: 11400000, guid: 3841ab8ecaef23e44b404236abb84da7, type: 2}
+  m_playerInputSender: {fileID: 1069174170}
+  m_chargingMinigameAnimator: {fileID: 0}
+--- !u!114 &1069174170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674528888418035454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac38f369e65d7054385d6ec5d0134878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
 --- !u!1 &2010073299879041119
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +379,7 @@ Transform:
   m_Children:
   - {fileID: 7664685170711810032}
   - {fileID: 7976951685586762171}
-  m_Father: {fileID: 8446374774368872484}
+  m_Father: {fileID: 1552712369700199655}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3496907505732866134
@@ -431,7 +467,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8446374774368872484}
+  - component: {fileID: 1552712369700199655}
   m_Layer: 0
   m_Name: Naito
   m_TagString: Untagged
@@ -439,8 +475,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8446374774368872484
-Transform:
+--- !u!224 &1552712369700199655
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -456,6 +492,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4821126738514716899
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,20 +600,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5331672935445739876}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2109480903439296398}
   - {fileID: 5852674375708379997}
-  m_Father: {fileID: 8446374774368872484}
+  m_Father: {fileID: 1552712369700199655}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 275.5, y: 155}
+  m_SizeDelta: {x: 551, y: 310}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4049431450310534024
 Canvas:
   m_ObjectHideFlags: 0
@@ -911,6 +952,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7664685170711810032}
   - component: {fileID: 7664685170711810033}
+  - component: {fileID: 818534419}
+  - component: {fileID: 818534418}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -944,12 +987,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed3a80a47bcf9240a440f70702af333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  balance: {fileID: 11400000, guid: 1aba2d8231e9f5d4a83b7ded927a825f, type: 2}
   health:
     value: 100
   charge:
     value: 1
   healthText: {fileID: 6521957159365149924}
   chargeText: {fileID: 7374466959550997960}
+  state: 3
+  activeMinigame: {fileID: 0}
+  chargingMinigame: {fileID: 818534419}
+  attackMinigame: {fileID: 0}
+  repairMinigame: {fileID: 0}
+--- !u!114 &818534419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664685170711810046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa9f4653eadb3f4686989ccf6c7e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minigamesConfig: {fileID: 11400000, guid: 3841ab8ecaef23e44b404236abb84da7, type: 2}
+  m_playerInputSender: {fileID: 818534418}
+  m_chargingMinigameAnimator: {fileID: 0}
+--- !u!114 &818534418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664685170711810046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac38f369e65d7054385d6ec5d0134878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 0
 --- !u!1 &7664685171170295147
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +1055,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8446374774368872484}
+  m_Father: {fileID: 1552712369700199655}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7664685171170295146
