@@ -73,7 +73,24 @@ public class Planet : MonoBehaviour
         //SFX can be placed here
         planetUI.blasterUI.SetChargeState(charge.Value);
         planetUI.ShootAtTarget(enemy.GetPlanetUI().transform.position, damage);//instad of: enemy.Hurt(damage);
+        planetUI.playerMessagesUI.ShowMessage(GetAttackString(result));
         this.TransitionTo(State.CHARGING);
+    }
+
+    private string GetAttackString(Result r)
+    {
+        switch (r)
+        {
+            case Result.NoInput:
+                return "Fail!";
+            case Result.Bad:
+                return "Bad!";
+            case Result.Ok:
+                return "Ok!";
+            case Result.Perfect:
+                return "Perfect!";
+        }
+        return "";
     }
 
     void RepairMinigameOutput()

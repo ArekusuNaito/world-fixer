@@ -8,6 +8,7 @@ public sealed class PlanetUI : MonoBehaviour
     public Planet planet;
     public PlanetButtonsUI planetButtonsUI;
     public BlasterUI blasterUI;
+    public PlayerMessagesUI playerMessagesUI;
 
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private DancerHelper dancerHelper;

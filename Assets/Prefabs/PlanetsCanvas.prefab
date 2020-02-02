@@ -1539,6 +1539,7 @@ MonoBehaviour:
   planet: {fileID: 0}
   planetButtonsUI: {fileID: 8268363835078365013}
   blasterUI: {fileID: 6769254547418905078}
+  playerMessagesUI: {fileID: 0}
   shootingPoint: {fileID: 1753491454}
   dancerHelper: {fileID: 2021310489}
   slowDanceConfig:
@@ -2106,6 +2107,7 @@ MonoBehaviour:
   planet: {fileID: 0}
   planetButtonsUI: {fileID: 7844756591629093147}
   blasterUI: {fileID: 3331574812961856887}
+  playerMessagesUI: {fileID: 0}
   shootingPoint: {fileID: 1774100443}
   dancerHelper: {fileID: 1062556443}
   slowDanceConfig:

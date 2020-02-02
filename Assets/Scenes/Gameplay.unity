@@ -186,10 +186,18 @@ PrefabInstance:
       propertyPath: planet
       value: 
       objectReference: {fileID: 1501033844}
+    - target: {fileID: 783937509, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
+      propertyPath: playerMessagesUI
+      value: 
+      objectReference: {fileID: 7966516291951586186}
     - target: {fileID: 2125656216, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
       propertyPath: planet
       value: 
       objectReference: {fileID: 325539164}
+    - target: {fileID: 2125656216, guid: 00ad376b0a6cd85489a7568c48d201b1, type: 3}
+      propertyPath: playerMessagesUI
+      value: 
+      objectReference: {fileID: 7966516291951586185}
     - target: {fileID: 558890202470728450, guid: 00ad376b0a6cd85489a7568c48d201b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -587,8 +595,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: JPCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8863814108018236042, guid: 5fdb0a02f769c7145a0485c57294cff8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -225.49997
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fdb0a02f769c7145a0485c57294cff8, type: 3}
+--- !u!114 &7966516291951586185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494157914746850695, guid: 5fdb0a02f769c7145a0485c57294cff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966516291951586184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726703ce8a50dbb43a43cc230b7471b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7966516291951586186 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 67560738982481035, guid: 5fdb0a02f769c7145a0485c57294cff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966516291951586184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726703ce8a50dbb43a43cc230b7471b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8703050449677084155
 PrefabInstance:
   m_ObjectHideFlags: 0
