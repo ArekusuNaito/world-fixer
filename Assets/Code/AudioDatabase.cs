@@ -4,9 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Audio Database", menuName = "Brotherhood/Audio Database", order = 1)]
 public class AudioDatabase : ScriptableObject
-{
-   public static AudioDatabase self;
-   
+{   
    [Header("Charging")]
    public AudioClip chargeSuccess;
    public AudioClip chargeFail;
@@ -23,14 +21,4 @@ public class AudioDatabase : ScriptableObject
    public AudioClip countdownSFX;
    public AudioClip startSFX;
    public AudioClip resultsSFX;
-
-   void Awake()
-   {
-       if(self==null)
-       {
-           AudioDatabase.self = this;
-           DontDestroyOnLoad(self);
-       }
-       
-   }
 }
