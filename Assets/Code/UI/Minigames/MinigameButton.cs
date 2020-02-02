@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChargingMinigameButton : MonoBehaviour
+public class MinigameButton : MonoBehaviour
 {
     [SerializeField] private Text buttonText;
 

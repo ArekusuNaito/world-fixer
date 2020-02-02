@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class JpDebugger : MonoBehaviour
 {
-    public ChargingMinigame chargingMinigame;
+    public RepairMinigame minigame;
     // Start is called before the first frame update
     void Start()
     {
-        chargingMinigame.StartMinigame();
+        minigame.StartMinigame();
+        minigame.OnRepairEnd += Minigame_OnRepairEnd;
     }
+
+    private void Minigame_OnRepairEnd()
+    {
+        Debug.Log("repari end");
+    }
+    
 }

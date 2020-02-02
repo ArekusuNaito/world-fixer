@@ -6,11 +6,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 using static SharedEnums;
 
-public class ChargingMinigameAnimator : MonoBehaviour
+public class ChargingMinigameUI : MonoBehaviour
 {
     [Header("UI References")]
+    [SerializeField] private GameObject m_rootObject;
     [SerializeField] private Image nextButton;
-    [SerializeField] private ChargingMinigameButton chargingMinigameButton;
+    [SerializeField] private MinigameButton chargingMinigameButton;
 
     [Header("AnimaitonConfig")]
     [SerializeField] private float buttonStartPosX;
@@ -33,6 +34,21 @@ public class ChargingMinigameAnimator : MonoBehaviour
     #endregion
 
     #region OUTSIDER API
+    public void Show()
+    {
+        m_rootObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        if (m_moveSequence != null)
+            m_moveSequence.Kill();
+        if (m_pressSequence != null)
+            m_pressSequence.Kill();
+        SetState(State.Idle);
+        m_rootObject.SetActive(false);
+    }
+
     public void StartNextButtonAnimation(InputButton btn, float fadeInDuration, float fadeOutDuration)
     {
         Debug.Assert(fadeInDuration > 0);
@@ -104,8 +120,6 @@ public class ChargingMinigameAnimator : MonoBehaviour
     #region STATES
     private void SetState(State state)
     {
-        Debug.Assert(state != State.Idle);
-        //Debug.Log($"ChargingMinigameAnimator state: {state}");
         m_state = state;
         if(OnButtonAnimationStateChanged!=null)
             OnButtonAnimationStateChanged(m_state);
