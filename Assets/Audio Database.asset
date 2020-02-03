@@ -19,7 +19,7 @@ MonoBehaviour:
   laserShoot: {fileID: 8300000, guid: 89ee0d5020af4ac439079eba0724b913, type: 3}
   laserImpacts: {fileID: 8300000, guid: 1786d7aa3b502bc49b1173a5d6747fbb, type: 3}
   repairWarning: {fileID: 8300000, guid: bcb0c94fca4fe8c43a784a7eddbc7004, type: 3}
-  repairA: {fileID: 8300000, guid: 1d30e7c657fec37498763f6351c6a265, type: 3}
+  repairA: {fileID: 8300000, guid: 1ab7a78ddd36fec4399761f962cb7cf5, type: 3}
   repairComplete: {fileID: 8300000, guid: 1f7b43d04e2c38f40a49dd0b8a3143c3, type: 3}
   countdownSFX: {fileID: 0}
   startSFX: {fileID: 0}
