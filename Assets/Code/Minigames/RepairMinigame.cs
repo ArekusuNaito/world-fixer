@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using static SharedEnums;
-using XInputDotNetPure;
+#if !UNITY_WEBGL
+    using XInputDotNetPure;
+#endif
 
 public sealed class RepairMinigame : Minigame
 {
@@ -41,13 +43,17 @@ public sealed class RepairMinigame : Minigame
         base.StopMinigame();
         repairMinigameUI.Hide();
         m_playerInputSender.OnButtonDownEvent -= PlayerInput_OnButtonDownEvent;
-        GamePad.SetVibration((PlayerIndex)myPlayer, 0, 0);
+        #if !UNITY_WEBGL
+            GamePad.SetVibration((PlayerIndex)myPlayer, 0, 0);
+        #endif
     }
 
     public void IamPlayer(Player player)
     {
         this.myPlayer = player;
-        GamePad.SetVibration((PlayerIndex)player, 1, 1);
+        #if !UNITY_WEBGL
+                GamePad.SetVibration((PlayerIndex)player, 1, 1);
+        #endif
     }
 
     #region MINIGAME

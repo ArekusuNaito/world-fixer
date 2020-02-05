@@ -40,11 +40,25 @@ public class GameMaster : MonoBehaviour
             DontDestroyOnLoad(self);
             audioDB = self.audioDatabase;
         } else Destroy(this);
+        AssignPlayerInputAccordingToPlatform();
         player1.Enemy=player2;
         player2.Enemy = player1;
         player1.GameOver = GameOver;
         player2.GameOver = GameOver;
 
+    }
+
+    void AssignPlayerInputAccordingToPlatform()
+    {
+        #if !UNITY_WEBGL
+            this.player1.gameObject.AddComponent<XInputSender>();
+            this.player2.gameObject.AddComponent<XInputSender>();       
+        #else
+            this.player1.gameObject.AddComponent<StandardInputSender>();
+            this.player2.gameObject.AddComponent<StandardInputSender>();
+        #endif
+        this.player1.GetComponent<PlayerInputSender>().playerIndex = SharedEnums.Player.P1;
+        this.player2.GetComponent<PlayerInputSender>().playerIndex = SharedEnums.Player.P2;
     }
     void Start()
     {

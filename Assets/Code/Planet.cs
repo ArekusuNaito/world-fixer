@@ -46,6 +46,13 @@ public class Planet : MonoBehaviour
         this.chargingMinigame.OnPlayerInputProcessedEvent += ChargeMinigameOutput;
         this.attackMinigame.OnMinigameEndEvent+=AttackMinigameOutput;
         this.repairMinigame.OnRepairEnd+=RepairMinigameOutput;
+        //get input
+        var inputSender = GetComponent<PlayerInputSender>();
+        Debug.Assert(inputSender!=null,"There's no Input sender component on the planet object");
+        //Automatically add the input sender to the minigames
+        this.chargingMinigame.SetInputSender = inputSender;
+        this.attackMinigame.SetInputSender = inputSender;
+        this.repairMinigame.SetInputSender = inputSender;
     }
 
     public Planet Enemy{set{this.enemy=value;}}

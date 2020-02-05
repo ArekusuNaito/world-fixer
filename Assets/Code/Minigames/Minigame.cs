@@ -9,6 +9,8 @@ public abstract class Minigame : MonoBehaviour
     [SerializeField] protected MinigamesConfig m_minigamesConfig;
     [SerializeField] protected PlayerInputSender m_playerInputSender;
 
+    public PlayerInputSender SetInputSender{set{this.m_playerInputSender = value;}}
+
     public bool IsActive { get; private set; } = false;
 
     public virtual void StartMinigame()

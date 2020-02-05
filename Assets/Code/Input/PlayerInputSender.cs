@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerInputSender : MonoBehaviour
 {
+    public SharedEnums.Player playerIndex;
     public event Action<SharedEnums.InputButton> OnButtonDownEvent;
     public event Action<SharedEnums.InputButton> OnButtonUpEvent;
     public event Action<SharedEnums.InputButton> OnButtonHoldEvent;
